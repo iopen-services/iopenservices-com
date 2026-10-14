@@ -6,6 +6,12 @@ This project was created using the Payload CLI with the following command:
 pnpm create payload-app@latest iopenservices-com -t website --use-pnpm -a claude
 ```
 
+The switches used in the command are:
+
+- `-t website`: specifies the template to use (in this case, the website template)
+- `--use-pnpm`: instructs the CLI to use pnpm as the package manager
+- `-a claude`: sets agent style to align with 'claude code'
+
 ## Development Pattern
 
 We use a hybrid development environment:
@@ -19,7 +25,7 @@ We use a hybrid development environment:
 We use:
 
 - [aider](https://github.com/paul-gauthier/aider) for AI-powered code generation
-- [customer agentic harness](https://github.com/iopen-services/agentic-tn) for agentic workflows
+- [custom agentic harness](https://github.com/iopen-services/agentic-tn) for agentic workflows
 
 ## Quick Start
 
@@ -44,7 +50,6 @@ To set up the project locally:
 This website promotes iOpen Services LLC, showcasing our services and expertise. The site features:
 
 - Company information and services
-- Blog for company updates and news
 - Contact form for inquiries
 
 For more information, visit [www.iopenservices.com](https://www.iopenservices.com).
@@ -56,11 +61,3 @@ For more information, visit [www.iopenservices.com](https://www.iopenservices.co
 - **Tools**:
   - [aider](https://github.com/paul-gauthier/aider) for AI-powered code generation
   - [customer agentic harness](https://github.com/iopen-services/customer-agentic-harness) for agentic workflows
-
-## Deployment
-
-| Environment | URL                   | Host   | Admin Route | Database Provider   |
-| ----------- | --------------------- | ------ | ----------- | ------------------- |
-| Production  | www.iopenservices.com | Vercel | /admin      | Supabase            |
-| Staging     | sss.iopenservices.com | Vercel | /admin      | Supabase            |
-| Local       | http://localhost:3000 | Local  | /admin      | PostgreSQL (Docker) |
