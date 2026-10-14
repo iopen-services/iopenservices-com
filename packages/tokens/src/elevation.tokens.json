@@ -1,0 +1,47 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "elevation": {
+    "level": {
+      "0": {
+        "$type": "shadow",
+        "$value": {
+          "color": "#000000",
+          "offsetX": "0",
+          "offsetY": "0",
+          "blur": "0",
+          "spread": "0"
+        }
+      },
+      "1": {
+        "$type": "shadow",
+        "$value": {
+          "color": "#0000001a",
+          "offsetX": "0",
+          "offsetY": "1px",
+          "blur": "2px",
+          "spread": "0"
+        }
+      },
+      "2": {
+        "$type": "shadow",
+        "$value": {
+          "color": "#0000001a",
+          "offsetX": "0",
+          "offsetY": "2px",
+          "blur": "4px",
+          "spread": "0"
+        }
+      },
+      "3": {
+        "$type": "shadow",
+        "$value": {
+          "color": "#0000001a",
+          "offsetX": "0",
+          "offsetY": "4px",
+          "blur": "8px",
+          "spread": "0"
+        }
+      }
+    }
+  }
+}

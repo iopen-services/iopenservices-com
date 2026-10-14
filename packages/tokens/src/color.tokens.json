@@ -1,0 +1,37 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "color": {
+    "brand": {
+      "eeBlue": {
+        "base": { "$type": "color", "$value": "#2d3c59" }, // Primary brand blue
+        "light": { "$type": "color", "$value": "#42506a" }, // Lighter blue variant
+        "dark": { "$type": "color", "$value": "#293650" } // Darker blue variant
+      },
+      "mtlMaroon": {
+        "base": { "$type": "color", "$value": "#98363b" }, // Secondary maroon color
+        "light": { "$type": "color", "$value": "#b25055" }, // Lighter maroon variant
+        "dark": { "$type": "color", "$value": "#aa3d43" } // Darker maroon variant
+      },
+      "ieGreen": {
+        "base": { "$type": "color", "$value": "#39b54a" }, // Accent green color
+        "light": { "$type": "color", "$value": "#7dc677" }, // Lighter green variant
+        "dark": { "$type": "color", "$value": "#2d883b" } // Darker green variant
+      },
+      "mafGold": {
+        "base": { "$type": "color", "$value": "#ffb20a" }, // Accent gold color
+        "light": { "$type": "color", "$value": "#ffba23" }, // Lighter gold variant
+        "dark": { "$type": "color", "$value": "#e6a009" } // Darker gold variant
+      }
+    },
+    "neutral": {
+      "white": { "$type": "color", "$value": "#FFFFFF" }, // Pure white
+      "black": { "$type": "color", "$value": "#000000" }, // Pure black
+      "oatmeal": { "$type": "color", "$value": "#F8F5EE" } // Off-white/cream color
+    },
+    "utility": {
+      "success": { "$type": "color", "$value": "{color.brand.ieGreen.base}" }, // Success state color
+      "warning": { "$type": "color", "$value": "{color.brand.mafGold.base}" }, // Warning state color
+      "error": { "$type": "color", "$value": "{color.brand.mtlMaroon.base}" } // Error state color
+    }
+  }
+}
