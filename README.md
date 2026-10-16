@@ -12,6 +12,17 @@ The switches used in the command are:
 - `--use-pnpm`: instructs the CLI to use pnpm as the package manager
 - `-a claude`: sets agent style to align with 'claude code'
 
+## Quick Start
+
+To set up the project locally:
+
+1. Start Orbstack: `orb start`
+2. Copy `.env.example` to `.env` and configure environment variables
+3. Start PostgreSQL with Docker: `docker-compose up -d`
+4. Install dependencies: `pnpm install`
+5. Run development server: `pnpm dev`
+6. Open `http://localhost:3000` in your browser
+
 ## Development Pattern
 
 We use a hybrid development environment:
