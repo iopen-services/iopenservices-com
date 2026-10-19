@@ -1,4 +1,6 @@
-# Payload CMS Project
+# Company website for iOpen Services LLC at www.iopenservices.com
+
+This is a Next.js powered site, running on Vercel, with content management via [Payload CMS](https://payloadcms.com).
 
 This project was created using the Payload CLI with the following command:
 
