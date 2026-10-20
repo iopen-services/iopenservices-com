@@ -1,76 +1,49 @@
 # Company website for iOpen Services LLC at www.iopenservices.com
 
-This is a Next.js powered site, running on Vercel, with content management via [Payload CMS](https://payloadcms.com).
-
-This project was created using the Payload CLI with the following command:
-
-```bash
-pnpm create payload-app@latest iopenservices-com -t website --use-pnpm -a claude
-```
-
-The switches used in the command are:
-
-- `-t website`: specifies the template to use (in this case, the website template)
-- `--use-pnpm`: instructs the CLI to use pnpm as the package manager
-- `-a claude`: sets agent style to align with 'claude code'
+This is a Next.js + Payload CMS website deployed on Vercel, with Supabase for production/staging databases and AWS S3 for media storage.
 
 ## Quick Start
 
-To set up the project locally:
+### Local Development
 
-1. Start Orbstack: `orb start`
-2. Copy `.env.example` to `.env` and configure environment variables
-3. Start PostgreSQL with Docker: `docker-compose up -d`
-4. Install dependencies: `pnpm install`
-5. Run development server: `pnpm dev`
-6. Open `http://localhost:3000` in your browser
+1. **Start Orbstack**: `orb start`
+2. **Configure Environment**:
+   ```bash
+   cp .env.example .env  # Configure variables
+   docker-compose up -d  # Start PostgreSQL (local)
+   pnpm install          # Install dependencies
+   pnpm dev             # Run dev server
+   ```
+3. Open `http://localhost:3000` in your browser.
 
-## Development Pattern
+### Tech Stack
 
-We use a hybrid development environment:
-
-- Next.js frontend runs locally on your machine
-- PostgreSQL database runs in a Docker container
-- `.env` file is used for local configuration
-
-## Tools
-
-We use:
-
-- [aider](https://github.com/paul-gauthier/aider) for AI-powered code generation
-- [custom agentic harness](https://github.com/iopen-services/agentic-tn) for agentic workflows
-
-## Quick Start
-
-To set up the project locally:
-
-1. Copy `.env.example` to `.env` and configure environment variables
-2. Start PostgreSQL with Docker: `docker-compose up -d`
-3. Install dependencies: `pnpm install`
-4. Run development server: `pnpm dev`
-5. Open `http://localhost:3000` in your browser
+- **Frontend**: Next.js (App Router), React, PostCSS
+- **Backend**: Payload CMS v3.x (TypeScript)
+  - **APIs**: GraphQL + REST (`/api/...`)
+  - **Database**:
+    - **Local**: PostgreSQL (Docker)
+    - **Staging/Production**: Supabase
+  - **Media Storage**: AWS S3 (US-East-2)
+- **Infrastructure**:
+  - **Hosting**: Vercel (frontend + serverless)
+  - **AWS**: S3 bucket for media (US-East-2)
+- **Testing**: Playwright (e2e), Vitest (unit)
+- **Tooling**: pnpm, Docker, Design Tokens (`packages/tokens`)
 
 ## Environments
 
-| Environment | URL                   | Host   | Admin Route | Database Provider   |
-| ----------- | --------------------- | ------ | ----------- | ------------------- |
-| Production  | www.iopenservices.com | Vercel | /admin      | Supabase            |
-| Staging     | sss.iopenservices.com | Vercel | /admin      | Supabase            |
-| Local       | http://localhost:3000 | Local  | /admin      | PostgreSQL (Docker) |
-
-## About iOpen Services LLC
-
-This website promotes iOpen Services LLC, showcasing our services and expertise. The site features:
-
-- Company information and services
-- Contact form for inquiries
-
-For more information, visit [www.iopenservices.com](https://www.iopenservices.com).
+| Environment | URL                     | Host   | Database   | Media Storage      |
+| ----------- | ----------------------- | ------ | ---------- | ------------------ |
+| Production  | www.iopenservices.com   | Vercel | Supabase   | AWS S3 (US-East-2) |
+| Staging     | staging.iopenservice... | Vercel | Supabase   | AWS S3 (US-East-2) |
+| Local       | http://localhost:3000   | Local  | PostgreSQL | Local filesystem   |
 
 ## Development Notes
 
-- **Pattern**: Next.js runs locally while PostgreSQL runs in Docker
-- **Configuration**: `.env` file handles local configuration
-- **Tools**:
-  - [aider](https://github.com/paul-gauthier/aider) for AI-powered code generation
-  - [customer agentic harness](https://github.com/iopen-services/customer-agentic-harness) for agentic workflows
+- **AI Tools**:
+  - OpenCode
+  - OpenRouter
+  - DeepSeek V3 for coding
+  - DeepSeek R1 for architecture and code design
+- **Pattern**: Hybrid local/Docker dev (Next.js + PostgreSQL).
