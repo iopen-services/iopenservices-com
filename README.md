@@ -47,3 +47,38 @@ This is a Next.js + Payload CMS website deployed on Vercel, with Supabase for pr
   - DeepSeek V3 for coding
   - DeepSeek R1 for architecture and code design
 - **Pattern**: Hybrid local/Docker dev (Next.js + PostgreSQL).
+
+# Supabase Database Connection Patterns
+
+## Environment Matrix
+
+| Environment                 | Host                                 | Port   | Network | Username Format             | Use Case                        |
+| :-------------------------- | :----------------------------------- | :----- | :------ | :-------------------------- | :------------------------------ |
+| **Prod / Staging (Vercel)** | `db.[REF].supabase.co`               | `5432` | IPv6    | `postgres.[REF]`            | Runtime App / Serverless Edge   |
+| **Local CLI / Migrations**  | `aws-0-[REGION].pooler.supabase.com` | `6543` | IPv4    | `postgres` + Tenant Options | `psql` / `pnpm payload migrate` |
+
+---
+
+## Working Connection Syntax
+
+To avoid PgBouncer routing errors (`ENOIDENTIFIER` / `EAUTHQUERY`) on IPv4 connections, append the tenant reference option and truncate the username to `postgres`.
+
+### 1. Interactive `psql` Shell
+
+```bash
+psql "host=aws-0-[REGION].pooler.supabase.com port=6543 dbname=postgres user=postgres options='reference=[REF]'" -W
+```
+
+### 2. Migration Connection String (`DATABASE_URI`)
+
+```bash
+DATABASE_URI="postgresql://postgres:[PASSWORD]@aws-0-[REGION].pooler.supabase.com:6543/postgres?options=reference%3D[REF]"
+```
+
+---
+
+## Quick Reference Parameters
+
+- **Project Ref:** `qihrxttlpnnruldoogwy`
+- **AWS Region:** `us-east-2` (Ohio)
+- **Pooler Endpoint:** `aws-0-us-east-2.pooler.supabase.com`
