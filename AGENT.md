@@ -12,3 +12,6 @@ This project uses AI-powered tools for development:
    - Automated PR reviews with agentic checks.
 2. **Environment Sync**:
    - Local ↔ Staging ↔ Production database syncs (via Supabase).
+
+Before changing anything, list every file you'll need and read them
+in one pass. Then make all edits, then run the tests once.
