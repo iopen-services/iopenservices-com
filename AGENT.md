@@ -12,9 +12,13 @@
 - **Package Manager**: Use `pnpm` exclusively (never `npm` or `yarn`).
 - **Git Restrictions**: You may run `git status` or `git diff` for read-only inspection. Do NOT run mutating git commands (`git add`, `git commit`, `git push`, `git checkout`, `git reset`, `git stash`, etc.). All version control changes are managed exclusively by the user.
 - **Environment & Secrets**: Never inline sensitive credentials into code, configs, or test fixtures—always reference `process.env`. Never modify `.gitignore`.
-- **Database Safety**:
+- **Database Safety & Inspection**:
   - Never execute destructive DDL commands, raw schema drops, or force-push migrations.
   - In `payload.config.ts`, `postgresAdapter` must always retain `push: false`.
+  - **Read-Only Inspection**: You are authorized to run read-only SQL queries (`SELECT`) to inspect database state:
+    - In integration tests: via `payload.db.drizzle.execute(sql`...`)`.
+    - In terminal checks: via `docker exec -i iopenservices-com-postgres-1 psql -U <user> -d <database> -c "..."`.
+  - Never execute `DROP`, `TRUNCATE`, or manual schema modifications.
 
 ## Architectural Topology & Infrastructure
 
@@ -22,7 +26,7 @@ Understand where code and services actually execute to avoid invalid assumptions
 
 - **Application Core**: Payload CMS v3 embedded inside the Next.js App Router (Node.js runtime; avoid Edge runtime for Payload handlers).
 - **Local Dev Execution**: Next.js runs bare-metal on the macOS host machine (`localhost`).
-- **Local Database**: PostgreSQL running inside a local Docker container (communicated via host network / mapped ports).
+- **Local Database**: PostgreSQL running inside local Docker container `iopenservices-com-postgres-1` (communicated via host network / mapped ports).
 - **Remote / Cloud Database**: Supabase PostgreSQL (managed migrations; schema push is disabled).
 - **Deployment & Hosting**: Vercel Serverless Functions. Disk storage is strictly ephemeral—local filesystem storage cannot persist across invocations.
 - **Media & Asset Storage**: AWS S3 (`iopenservices-com-cdn`, `us-east-2`). Modern S3 with **Bucket Owner Enforced (ACLs disabled)**.
