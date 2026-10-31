@@ -6,7 +6,11 @@ export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   test: {
     environment: 'jsdom',
+    environmentMatchGlobs: [
+      ['src/**/*.spec.ts', 'node'],
+      ['tests/int/**/*.int.spec.ts', 'node'],
+    ],
     setupFiles: ['./vitest.setup.ts'],
-    include: ['tests/int/**/*.int.spec.ts'],
+    include: ['tests/int/**/*.int.spec.ts', 'src/**/*.spec.ts'],
   },
 })
