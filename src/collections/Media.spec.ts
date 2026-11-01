@@ -79,9 +79,9 @@ describe('Media Collection - S3 Storage Integration', () => {
     expect(headResult.ContentLength).toBeGreaterThan(0)
 
     // Assert 3: Database row has correct URL
-    const dbResult = await payload.db.drizzle.execute(
-      payload.db.sql`SELECT url FROM "media" WHERE id = ${doc.id}`,
-    )
+    const dbResult = await payload.db.pool.query('SELECT url FROM "media" WHERE id = $1', [doc.id])
+    const row = dbResult.rows[0]
+    expect(row.url).toBe(`https://${bucket}.s3.us-east-2.amazonaws.com/${doc.filename}`)
 
     expect(dbResult.rows[0].url).toBe(
       `https://${bucket}.s3.us-east-2.amazonaws.com/${doc.filename}`,
