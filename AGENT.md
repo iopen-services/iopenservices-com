@@ -45,3 +45,12 @@ Understand where code and services actually execute to avoid invalid assumptions
 
 - **Model & Inference**: Cloud API execution via OpenRouter. Instructions apply universally across any active reasoning or instruction-tuned model.
 - **Custom Agentic Harness**: Managed CLI tooling, PR review workflows, integration test validation, and deployment gates.
+  \=======
+
+## Patterns
+
+1. **AI-Assisted Development**:
+   - Code generation via CLI prompts.
+   - Automated PR reviews with agentic checks.
+2. **Environment Sync**:
+   - Local ↔ Staging ↔ Production database syncs (via Supabase).
