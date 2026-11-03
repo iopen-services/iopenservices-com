@@ -71,6 +71,7 @@ export default buildConfig({
     s3Storage({
       collections: {
         media: {
+          prefix: process.env.S3_MEDIA_PREFIX || 'dev',
           generateFileURL: ({ filename, prefix }) => {
             const bucket = process.env.S3_BUCKET
             const region = process.env.AWS_REGION || 'us-east-2'
