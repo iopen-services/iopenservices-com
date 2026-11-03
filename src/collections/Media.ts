@@ -5,15 +5,15 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
-import path from 'path'
-import { fileURLToPath } from 'url'
+
 
 import { anyone } from '../access/anyone'
 import { authenticated } from '../access/authenticated'
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
 
+
+// TODO: After local testing with Docker DB, test locally against Supabase staging DB
+// (easier to fix issues before deploying to Vercel)
 export const Media: CollectionConfig = {
   slug: 'media',
   folders: true,
@@ -41,7 +41,7 @@ export const Media: CollectionConfig = {
   ],
   upload: {
     // Upload to the public/media directory in Next.js making them publicly accessible even outside of Payload
-    staticDir: path.resolve(dirname, '../../public/media'),
+    
     adminThumbnail: 'thumbnail',
     focalPoint: true,
     imageSizes: [

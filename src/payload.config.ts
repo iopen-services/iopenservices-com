@@ -3,6 +3,7 @@ import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
+import { s3Storage } from '@payloadcms/storage-s3'
 
 import { Categories } from './collections/Categories'
 import { Media } from './collections/Media'
@@ -65,7 +66,33 @@ export default buildConfig({
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
-  plugins,
+  plugins: [
+    ...plugins,
+    s3Storage({
+      collections: {
+        media: {
+          prefix: process.env.S3_MEDIA_PREFIX || 'dev',
+          generateFileURL: ({ filename, prefix }) => {
+            const bucket = process.env.S3_BUCKET
+            const region = process.env.AWS_REGION || 'us-east-2'
+            const url = prefix
+              ? `https://${bucket}.s3.${region}.amazonaws.com/${prefix}/${filename}`
+              : `https://${bucket}.s3.${region}.amazonaws.com/${filename}`
+
+            return url
+          },
+        },
+      },
+      bucket: process.env.S3_BUCKET || '',
+      config: {
+        credentials: {
+          accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
+        },
+        region: process.env.AWS_REGION || 'us-east-2',
+      },
+    }),
+  ],
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {
