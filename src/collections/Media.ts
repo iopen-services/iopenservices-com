@@ -12,6 +12,8 @@ import { authenticated } from '../access/authenticated'
 
 
 
+// TODO: After local testing with Docker DB, test locally against Supabase staging DB
+// (easier to fix issues before deploying to Vercel)
 export const Media: CollectionConfig = {
   slug: 'media',
   folders: true,
